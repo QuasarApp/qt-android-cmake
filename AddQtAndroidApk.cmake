@@ -286,7 +286,6 @@ macro(add_qt_android_apk TARGET SOURCE_TARGET)
     # create a custom command that will run the androiddeployqt utility to prepare the Android package
     add_custom_target(
         ${TARGET}
-        ALL
         DEPENDS ${SOURCE_TARGET}
         ${QT_ANDROID_PRE_COMMANDS}
         # it seems that recompiled libraries are not copied if we don't remove them first
