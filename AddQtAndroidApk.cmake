@@ -15,11 +15,6 @@ if(NOT ANDROID)
     message(FATAL_ERROR "Trying to use the CMake Android package without the Android toolchain. Please use the provided toolchain (toolchain/android.toolchain.cmake)")
 endif()
 
-# find the Qt root directory
-if(NOT Qt5Core_DIR)
-    find_package(Qt5Core REQUIRED)
-endif()
-get_filename_component(QT_ANDROID_QT_ROOT "${Qt5Core_DIR}/../../.." ABSOLUTE)
 message(STATUS "Found Qt for Android: ${QT_ANDROID_QT_ROOT}")
 
 # find the Android SDK
