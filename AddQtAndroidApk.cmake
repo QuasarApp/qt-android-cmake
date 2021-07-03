@@ -22,7 +22,7 @@ endif()
 
 # find the Qt root directory
 if(NOT Qt${QT_VERSION_MAJOR}Core_DIR)
-    find_package(Qt{QT_VERSION_MAJOR}Core REQUIRED)
+    find_package(Qt${QT_VERSION_MAJOR}Core REQUIRED)
 endif()
 get_filename_component(QT_ANDROID_QT_ROOT "${Qt${QT_VERSION_MAJOR}Core_DIR}/../../.." ABSOLUTE)
 message(STATUS "Found Qt for Android: ${QT_ANDROID_QT_ROOT}")
