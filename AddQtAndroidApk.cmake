@@ -15,6 +15,15 @@ if(NOT ANDROID)
     message(FATAL_ERROR "Trying to use the CMake Android package without the Android toolchain. Please use the provided toolchain (toolchain/android.toolchain.cmake)")
 endif()
 
+if(NOT QT_VERSION_MAJOR)
+    message(FATAL_ERROR "Trying to use the CMake Android package without the QT_VERSION_MAJOR variable. Please set QT_VERSION_MAJOR varibale to 5 or 6 value before include the AndroidApk")
+endif()
+
+# find the Qt root directory
+if(NOT Qt${QT_VERSION_MAJOR}Core_DIR)
+    find_package(Qt5Core REQUIRED)
+endif()
+get_filename_component(QT_ANDROID_QT_ROOT "${Qt${QT_VERSION_MAJOR}Core_DIR}/../../.." ABSOLUTE)
 message(STATUS "Found Qt for Android: ${QT_ANDROID_QT_ROOT}")
 
 # find the Android SDK
