@@ -16,8 +16,7 @@ if(NOT ANDROID)
 endif()
 
 if(NOT QT_VERSION_MAJOR)
-    message(WARNING "The QT_VERSION_MAJOR variable not definde by default use the qt5")
-    set(QT_VERSION_MAJOR 5)
+    find_package(QT NAMES Qt6 Qt5 COMPONENTS Core REQUIRED)
 endif()
 
 # find the Qt root directory
