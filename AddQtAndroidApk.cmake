@@ -298,6 +298,7 @@ macro(add_qt_android_apk TARGET SOURCE_TARGET)
         COMMAND ${CMAKE_COMMAND} -E copy ${QT_ANDROID_APP_PATH} ${QT_ANDROID_APP_BINARY_DIR}/libs/${ANDROID_ABI}
         COMMAND ${QT_ANDROID_QT_ROOT}/bin/androiddeployqt
         --verbose
+        --aab
         --output ${QT_ANDROID_APP_BINARY_DIR}
         --input ${CMAKE_CURRENT_BINARY_DIR}/qtdeploy.json
         --gradle
