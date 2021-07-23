@@ -26,6 +26,16 @@ endif()
 get_filename_component(QT_ANDROID_QT_ROOT "${Qt${QT_VERSION_MAJOR}Core_DIR}/../../.." ABSOLUTE)
 message(STATUS "Found Qt for Android: ${QT_ANDROID_QT_ROOT}")
 
+if (${QT_VERSION_MAJOR} GREATER_EQUAL 6)
+    if (NOT QT_HOST_PATH)
+        message(FATAL_ERROR "You need tot override QT_HOST_PATH variable for find androiddeployqt tool.")
+    endif()
+
+    set(ANDROID_DEPLOY_TOOL_ROOT_PATH "${QT_HOST_PATH}")
+else()
+    set(ANDROID_DEPLOY_TOOL_ROOT_PATH "${QT_ANDROID_QT_ROOT}")
+endif()
+
 # find the Android SDK
 if(NOT QT_ANDROID_SDK_ROOT)
     set(QT_ANDROID_SDK_ROOT $ENV{ANDROID_SDK})
@@ -75,7 +85,7 @@ macro(add_qt_android_apk TARGET SOURCE_TARGET)
 
     # extract the full path of the source target binary
     set(QT_ANDROID_APP_PATH "$<TARGET_FILE:${SOURCE_TARGET}>")  # full file path to the app's main shared library
-    if(${Qt5Core_VERSION} VERSION_GREATER_EQUAL 5.14)
+    if(${Qt${QT_VERSION_MAJOR}Core_VERSION} VERSION_GREATER_EQUAL 5.14)
         set(QT_ANDROID_SUPPORT_MULTI_ABI ON)
     endif()
 
@@ -296,7 +306,7 @@ macro(add_qt_android_apk TARGET SOURCE_TARGET)
         COMMAND ${CMAKE_COMMAND} -E remove_directory ${QT_ANDROID_APP_BINARY_DIR}/libs/${ANDROID_ABI}
         COMMAND ${CMAKE_COMMAND} -E make_directory ${QT_ANDROID_APP_BINARY_DIR}/libs/${ANDROID_ABI}
         COMMAND ${CMAKE_COMMAND} -E copy ${QT_ANDROID_APP_PATH} ${QT_ANDROID_APP_BINARY_DIR}/libs/${ANDROID_ABI}
-        COMMAND ${QT_ANDROID_QT_ROOT}/bin/androiddeployqt
+        COMMAND ${ANDROID_DEPLOY_TOOL_ROOT_PATH}/bin/androiddeployqt
         --verbose
         --aab
         --output ${QT_ANDROID_APP_BINARY_DIR}
