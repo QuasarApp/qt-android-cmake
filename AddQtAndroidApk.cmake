@@ -32,12 +32,14 @@ if (${QT_VERSION_MAJOR} GREATER_EQUAL 6)
     endif()
 
     set(ANDROID_DEPLOY_TOOL_ROOT_PATH "${QT_HOST_PATH}")
-    set(ANDROID_INPUT_JSON  ${CMAKE_CURRENT_BINARY_DIR}/android-${SOURCE_TARGET}-deployment-settings.json)
+
 else()
     set(ANDROID_DEPLOY_TOOL_ROOT_PATH "${QT_ANDROID_QT_ROOT}")
-    set(ANDROID_INPUT_JSON  ${CMAKE_CURRENT_BINARY_DIR}/qtdeploy.json)
 
 endif()
+
+set(QT_ANDROID_IMPORTSCANER_BINARY "${ANDROID_DEPLOY_TOOL_ROOT_PATH}/bin/qmlimportscanner")
+set(QT_ANDROID_RCC_BINARY "${ANDROID_DEPLOY_TOOL_ROOT_PATH}/libexec/rcc")
 
 # find the Android SDK
 if(NOT QT_ANDROID_SDK_ROOT)
@@ -313,7 +315,7 @@ macro(add_qt_android_apk TARGET SOURCE_TARGET)
         --verbose
         --aab
         --output ${QT_ANDROID_APP_BINARY_DIR}
-        --input ${ANDROID_INPUT_JSON}
+        --input ${CMAKE_CURRENT_BINARY_DIR}/qtdeploy.json
         --gradle
         ${QT_ANDROID_BUILD_TYPE}
         ${TARGET_LEVEL_OPTIONS}
