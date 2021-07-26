@@ -320,7 +320,7 @@ macro(add_qt_android_apk TARGET SOURCE_TARGET)
         ${QT_ANDROID_BUILD_TYPE}
         ${TARGET_LEVEL_OPTIONS}
         ${INSTALL_OPTIONS}
-#        ${SIGN_OPTIONS}
+        ${SIGN_OPTIONS}
     )
 
 endmacro()
