@@ -103,7 +103,7 @@ add_qt_android_apk(my_app_apk my_app
 
 ### VERSION_CODE
 
-The internal version of the application. It must be a single number, incremented everytime your app is updated on the play store (otherwise it has no importance). If not given, the number 1 is used.
+The internal version of the application. It must be a single number, incremented every time your app is updated on the play store (otherwise it has no importance). If not given, the number 1 is used.
 
 Note that the public version of the application, which is a different thing, is taken from the VERSION property of the CMake target. If none is provided, the VERSION_CODE number is used.
 
